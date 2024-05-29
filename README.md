@@ -2,7 +2,7 @@
 
 This is a simple weather (with location photos) application built with HTML, CSS, JavaScript, EJS, Node.js, and Express. It utilizes an API to fetch weather data and display it to the user.
 ## Preview
-![View1](https://github.com/Ozgur-Deniz/WeatherApp/blob/main/public/photos/siteViews/Site1.gif)
+![View1](https://github.com/Ozgur-Deniz/WeatherApp/blob/main/public/photos/siteViews/Site.gif)
 ## Features
 
 - **Current Weather:** Users can see the current weather conditions, including temperature, humidity, and wind speed.
