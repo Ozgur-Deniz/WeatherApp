@@ -7,6 +7,7 @@ This is a simple weather (with location photos) application built with HTML, CSS
 
 - **Current Weather:** Users can see the current weather conditions, including temperature, humidity, and wind speed.
 - **Search:** Users can search for the weather in different locations by typing in the city name.
+- **Photos:** Users can see the photo of the city(location) they are looking for.
 - **Responsive Design:** The application is designed to work well on both desktop and mobile devices.
 
 ## Technologies Used
