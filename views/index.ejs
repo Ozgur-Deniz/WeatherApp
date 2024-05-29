@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="icon" href="photos/favicon.png" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <title>Weather App</title>
+  </head>
+
+  <body>
+    <div class="generalContainer">
+      <div class="header">
+        <h2 class="title">theWeather</h2>
+        <div class="searchPart">
+          <form id="locationInput" action="/" method="post" autocomplete="off">
+            <div class="searchInput">
+              <i
+                class="fa-solid fa-location-crosshairs fa-lg mapIcon"
+                style="color: #1d24ca"
+              ></i>
+              <input
+                type="text"
+                class="search"
+                placeholder="Search a city or location..."
+                name="currentCity"
+              />
+              <button class="searchBtn">
+                <i class="fa-solid fa-magnifying-glass searchIcon"></i>
+              </button>
+              <div class="autocomplete">
+                <!-- <ul class="autocompleteUl">
+                <li>
+                <i class="fa-solid fa-location-dot" style="color: #ab00fa"></i><button>Ankara</button>
+              </li>
+              <li>
+                <i class="fa-solid fa-location-dot" style="color: #ab00fa"></i><button>United Kingdom</button>
+              </li>
+              <li>
+                <i class="fa-solid fa-location-dot" style="color: #ab00fa"></i><button>Barcelona</button>
+              </li>
+              <li>
+                <i class="fa-solid fa-location-dot" style="color: #ab00fa"></i><button>Kahramanmaraş</button>
+              </li>
+              </ul> -->
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modes">
+          <div class="darkMode">
+            <button class="modeButton">
+              <i id="modeBtn" class="fa-solid fa-bolt darkImg"></i>
+            </button>
+          </div>
+          <img src="photos/jok.jpeg" alt="profil photo" class="jok" />
+        </div>
+      </div>
+      <div class="main">
+        <div class="currentLocation">
+          <div class="curLocaHeader">
+            <div class="locationInfo">
+              <div class="location">
+                <i
+                  class="fa-solid fa-location-dot fa-2xl"
+                  style="color: #ab00fa"
+                ></i>
+                <p class="locationName">
+                  <%= content.location.name %>,
+                  <span> <%= content.location.country %> </span>
+                </p>
+              </div>
+              <div class="currentDate">
+                <i
+                  class="fa-solid fa-calendar-days fa-xl"
+                  style="color: #ab00fa"
+                ></i>
+                <p><%= monthDay %></p>
+              </div>
+            </div>
+            <div class="propertieButtons">
+              <button class="forecastBtn">Hourly</button>
+            </div>
+          </div>
+          <div class="weather">
+            <div class="weatherMain">
+              <div class="weatherMainHeader">
+                <p><%= forecast.data[0].datetime %></p>
+                <div class="locationDate">
+                  <p style="font-size: 1.5rem"><%= clock %></p>
+                </div>
+              </div>
+              <div class="weatherMainPart">
+                <div class="weatherMainFirst">
+                  <h1 class="degree"><%= content.current.temp_c %>°</h1>
+                  <p class="mainPropertie">
+                    <span>Real Feel </span>
+                    <%= content.current.feelslike_c %> °
+                  </p>
+                  <p class="mainPropertie">
+                    <span>Max temp </span>
+                    <%= content.forecast.forecastday[0].day.maxtemp_c %> °
+                  </p>
+                  <p class="mainPropertie">
+                    <span>Min temp </span>
+                    <%= content.forecast.forecastday[0].day.mintemp_c %> °
+                  </p>
+                  <p class="mainPropertie">
+                    <span>Pressure </span>
+                    <%= content.current.pressure_mb %> MB
+                  </p>
+                </div>
+                <div class="weatherMainSecond">
+                  <img
+                    src="<%= content.current.condition.icon %>"
+                    alt=""
+                    class="weatherImg"
+                  />
+                  <p class="mainPropertie p1">
+                    <span>Sunrise </span>
+                    <%=content.forecast.forecastday[0].astro.sunrise %>
+                  </p>
+                  <p class="mainPropertie p2">
+                    <span>Sunset </span>
+                    <%= content.forecast.forecastday[0].astro.sunset %>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="forecast">
+              <div class="day">
+                <div class="dayHeader">
+                  <p><%= forecast.data[1].datetime%></p>
+                </div>
+                <img
+                  src="photos/forecasticons/icons/<%= forecast.data[1].weather.icon %>.png"
+                  alt=""
+                />
+                <h1><%= Math.floor(forecast.data[1].temp) %>°</h1>
+              </div>
+              <div class="day">
+                <div class="dayHeader">
+                  <p><%= forecast.data[2].datetime%></p>
+                </div>
+                <img
+                  src="photos/forecasticons/icons/<%= forecast.data[2].weather.icon %>.png"
+                  alt=""
+                />
+                <h1><%= Math.floor(forecast.data[2].temp) %>°</h1>
+              </div>
+              <div class="day">
+                <div class="dayHeader">
+                  <p><%= forecast.data[3].datetime%></p>
+                </div>
+                <img
+                  src="photos/forecasticons/icons/<%= forecast.data[3].weather.icon %>.png"
+                  alt=""
+                />
+                <h1><%= Math.floor(forecast.data[3].temp) %>°</h1>
+              </div>
+              <div class="day">
+                <div class="dayHeader">
+                  <p><%= forecast.data[4].datetime%></p>
+                </div>
+                <img
+                  src="photos/forecasticons/icons/<%= forecast.data[4].weather.icon %>.png"
+                  alt=""
+                />
+                <h1><%= Math.floor(forecast.data[4].temp) %>°</h1>
+              </div>
+              <div class="day">
+                <div class="dayHeader">
+                  <p><%= forecast.data[5].datetime%></p>
+                </div>
+                <img
+                  src="photos/forecasticons/icons/<%= forecast.data[5].weather.icon %>.png"
+                  alt=""
+                />
+                <h1><%= Math.floor(forecast.data[5].temp) %>°</h1>
+              </div>
+            </div>
+            <div class="forecastSecondCase">
+              <div class="table">
+                <div class="tableHeader">
+                  <h4>Hourly Temperature</h4>
+                </div>
+                <div class="chart">
+                  <div class="hrs">
+                    <hr />
+                    <hr />
+                    <hr />
+                  </div>
+                  <div class="hrTemp">
+                    <p>30°</p>
+                    <p>15°</p>
+                    <p>0°</p>
+                  </div>
+                  <div class="chartValues">
+                    <div class="chartValue chartValue1"></div>
+                    <div class="chartValue chartValue2"></div>
+                    <div class="chartValue chartValue3"></div>
+                    <div class="chartValue chartValue4"></div>
+                    <div class="chartValue chartValue5"></div>
+                    <div class="chartValue chartValue6"></div>
+                  </div>
+                </div>
+                <div class="tableHours">
+                  <button class="hourlyBtn hourlyBtn1">04:00</button>
+                  <button class="hourlyBtn hourlyBtn2">08:00</button>
+                  <button class="hourlyBtn hourlyBtn3">12:00</button>
+                  <button class="hourlyBtn hourlyBtn4">16:00</button>
+                  <button class="hourlyBtn hourlyBtn5">20:00</button>
+                  <button class="hourlyBtn hourlyBtn6">00:00</button>
+                  <div class="clocksTemps">
+                    <p class="clocktemp1">
+                      <%= content.forecast.forecastday[0].hour[4].temp_c %>
+                    </p>
+                    <p class="clocktemp2">
+                      <%= content.forecast.forecastday[0].hour[8].temp_c %>
+                    </p>
+                    <p class="clocktemp3">
+                      <%= content.forecast.forecastday[0].hour[12].temp_c %>
+                    </p>
+                    <p class="clocktemp4">
+                      <%= content.forecast.forecastday[0].hour[16].temp_c %>
+                    </p>
+                    <p class="clocktemp5">
+                      <%= content.forecast.forecastday[0].hour[20].temp_c %>
+                    </p>
+                    <p class="clocktemp6">
+                      <%= content.forecast.forecastday[0].hour[0].temp_c %>
+                    </p>
+                  </div>
+                  <div class="clocksIcon">
+                    <p class="clockicon1">
+                      <%= content.forecast.forecastday[0].hour[4].condition.icon
+                      %>
+                    </p>
+                    <p class="clockicon2">
+                      <%= content.forecast.forecastday[0].hour[8].condition.icon
+                      %>
+                    </p>
+                    <p class="clockicon3">
+                      <%=
+                      content.forecast.forecastday[0].hour[12].condition.icon %>
+                    </p>
+                    <p class="clockicon4">
+                      <%=
+                      content.forecast.forecastday[0].hour[16].condition.icon %>
+                    </p>
+                    <p class="clockicon5">
+                      <%=
+                      content.forecast.forecastday[0].hour[20].condition.icon %>
+                    </p>
+                    <p class="clockicon6">
+                      <%= content.forecast.forecastday[0].hour[0].condition.icon
+                      %>
+                    </p>
+                  </div>
+                  <div class="clocksText">
+                    <p class="clocktext1">
+                      <%= content.forecast.forecastday[0].hour[4].condition.text
+                      %>
+                    </p>
+                    <p class="clocktext2">
+                      <%= content.forecast.forecastday[0].hour[8].condition.text
+                      %>
+                    </p>
+                    <p class="clocktext3">
+                      <%=
+                      content.forecast.forecastday[0].hour[12].condition.text %>
+                    </p>
+                    <p class="clocktext4">
+                      <%=
+                      content.forecast.forecastday[0].hour[16].condition.text %>
+                    </p>
+                    <p class="clocktext5">
+                      <%=
+                      content.forecast.forecastday[0].hour[20].condition.text %>
+                    </p>
+                    <p class="clocktext6">
+                      <%= content.forecast.forecastday[0].hour[0].condition.text
+                      %>
+                    </p>
+                  </div>
+                </div>
+                <div class="hourslyCases">
+                  <div class="hourslyCase">
+                    <i class="fa-solid fa-circle" style="color: #5ab2ff"></i>
+                    <p>Under Zero</p>
+                  </div>
+                  <div class="hourslyCase">
+                    <i class="fa-solid fa-circle" style="color: #ffc94a"></i>
+                    <p>Low</p>
+                  </div>
+                  <div class="hourslyCase">
+                    <i class="fa-solid fa-circle" style="color: #ff6500"></i>
+                    <p>Medium</p>
+                  </div>
+                  <div class="hourslyCase">
+                    <i class="fa-solid fa-circle" style="color: #c40c0c"></i>
+                    <p>High</p>
+                  </div>
+                </div>
+              </div>
+              <div class="selectedHourContainer">
+                <h2>Selected Time</h2>
+                <button class="selectedBtn">04:00</button>
+                <div class="selectedMain">
+                  <img
+                    src="<%= content.forecast.forecastday[0].hour[4].condition.icon %>"
+                    class="selectedHourIcon"
+                    alt=""
+                  />
+                  <div class="selectedPropertie1">
+                    <p>Temperature</p>
+                    <h4 class="selectedHourTemp">
+                      <%= content.forecast.forecastday[0].hour[4].temp_c %>°
+                    </h4>
+                  </div>
+                </div>
+                <h4 class="selectedHourWeather">
+                  <%= content.forecast.forecastday[0].hour[4].condition.text %>
+                </h4>
+              </div>
+            </div>
+          </div>
+          <h2>Today's Overview</h2>
+          <div class="overviews">
+            <div class="overview1">
+              <div class="windCard card">
+                <h4 class="cardHeader">Wind Status</h4>
+                <div class="cardPart">
+                  <div class="windMain">
+                    <div class="mainShape1 mainShapes"></div>
+                    <div class="mainShape2 mainShapes"></div>
+                    <div class="mainShape3 mainShapes"></div>
+                    <div class="mainShape4 mainShapes"></div>
+                    <div class="mainShape5 mainShapes"></div>
+                    <div class="mainShape6 mainShapes"></div>
+                    <div class="mainShape7 mainShapes"></div>
+                    <div class="mainShape8 mainShapes"></div>
+                    <div class="mainShape9 mainShapes"></div>
+                    <div class="mainShape10 mainShapes"></div>
+                    <div class="mainShape11 mainShapes"></div>
+                    <div class="mainShape12 mainShapes"></div>
+                    <div class="mainShape13 mainShapes"></div>
+                    <div class="mainShape14 mainShapes"></div>
+                    <div class="mainShape15 mainShapes"></div>
+                    <div class="mainShape16 mainShapes"></div>
+                    <div class="mainShape17 mainShapes"></div>
+                    <div class="mainShape18 mainShapes"></div>
+                    <div class="mainShape19 mainShapes"></div>
+                    <div class="mainShape20 mainShapes"></div>
+                  </div>
+                  <div class="cardRow">
+                    <div class="windRowBug">
+                      <p class="cardRowP1 windCardRowP1">
+                        <%= content.current.wind_kph %>
+                      </p>
+                      <span>km/h</span>
+                    </div>
+                    <p class="windType"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="humidityCard card">
+                <h4 class="cardHeader">Humidity</h4>
+                <div class="cardPart">
+                  <div class="cardImg">
+                    <img src="photos/humidity.png" alt="" />
+                  </div>
+                  <div class="cardRow cardRow2">
+                    <p class="cardRowP1 cardRowP2">
+                      <%= content.current.humidity %> <span>%</span>
+                    </p>
+                    <div class="cardRowImg">
+                      <img src="photos/smallHumidity.png" alt="" />
+                      <p>
+                        <span>The dew point is </span>
+                        <%= content.forecast.forecastday[0].hour[0].dewpoint_c
+                        %> °
+                        <span>right now.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="overview2">
+              <div class="uvcard card">
+                <h4 class="cardHeader">UV Index</h4>
+                <div class="cardPart uvCardPart">
+                  <div class="uvCard">
+                    <div class="uvMain">
+                      <div class="mainShape">
+                        <hr class="shape" />
+                      </div>
+                    </div>
+                    <div class="cases">
+                      <div class="case">
+                        <i class="fa-solid fa-circle fa-xs status1"></i>
+                        <p>Low</p>
+                      </div>
+                      <div class="case">
+                        <i class="fa-solid fa-circle fa-xs status2"></i>
+                        <p>Medium</p>
+                      </div>
+                      <div class="case">
+                        <i class="fa-solid fa-circle fa-xs status3"></i>
+                        <p>High</p>
+                      </div>
+                      <div class="case">
+                        <i class="fa-solid fa-circle fa-xs status4"></i>
+                        <p>Very High</p>
+                      </div>
+                      <div class="case">
+                        <i class="fa-solid fa-circle fa-xs status5"></i>
+                        <p>Extremely High</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cardRow">
+                    <p class="cardRowP1 uvCardRowP1">
+                      <%= content.forecast.forecastday[0].day.uv %>
+                      <span>UV</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="visibilityCard card">
+                <h4 class="cardHeader">Visibility</h4>
+                <div class="cardPart">
+                  <div class="cardImg">
+                    <img src="photos/visibility.png" alt="" />
+                  </div>
+                  <div class="cardRow cardRow2">
+                    <p class="cardRowP1 cardRowP2">
+                      <%= content.forecast.forecastday[0].day.avgvis_km %> km
+                    </p>
+                    <div class="cardRowImg">
+                      <img src="photos/smallvisiblty.png" alt="" />
+                      <p class="visiP">
+                        <span>Haze is affecting visibility.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="overview3">
+              <h2>
+                <i class="fa-solid fa-images fa-lg" style="color: #ab00fa"></i>
+                Location's Photos
+              </h2>
+              <div class="slider">
+                <img src="<%= photos[0] %>" class="fener" alt="" />
+                <button class="sliderBtnLeft">
+                  <i class="fa-solid fa-caret-left fa-xl"></i>
+                </button>
+                <button class="sliderBtnRight">
+                  <i class="fa-solid fa-caret-right fa-xl"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="otherCities">
+          <div class="otherCityText">
+            <h3 class="otherCitysHeader">Other Cities</h3>
+          </div>
+          <div class="anotherCity anotherCity1">
+            <div class="anotherCityProperties">
+              <p class="anotherCityCountry"><%= istanbul.location.country %></p>
+              <p class="anotherCityCity"><%= istanbul.location.name %></p>
+              <p class="anotherCityWeatherCase">
+                <%= istanbul.current.condition.text %>
+              </p>
+            </div>
+            <div class="anotherCityWeather">
+              <img src="<%= istanbul.current.condition.icon %>" alt="" />
+            </div>
+          </div>
+          <div class="anotherCity anotherCity2">
+            <div class="anotherCityProperties">
+              <p class="anotherCityCountry"><%= karabuk.location.country %></p>
+              <p class="anotherCityCity"><%= karabuk.location.name %></p>
+              <p class="anotherCityWeatherCase">
+                <%= karabuk.current.condition.text %>
+              </p>
+            </div>
+            <div class="anotherCityWeather">
+              <img src="<%= karabuk.current.condition.icon %>" alt="" />
+            </div>
+          </div>
+          <div class="anotherCity anotherCity3">
+            <div class="anotherCityProperties">
+              <p class="anotherCityCountry"><%= london.location.country %></p>
+              <p class="anotherCityCity"><%= london.location.name %></p>
+              <p class="anotherCityWeatherCase">
+                <%= london.current.condition.text %>
+              </p>
+            </div>
+            <div class="anotherCityWeather">
+              <img src="<%= london.current.condition.icon %>" alt="" />
+            </div>
+          </div>
+          <div class="anotherCity anotherCity4">
+            <div class="anotherCityProperties">
+              <p class="anotherCityCountry"><%= tokyo.location.country %></p>
+              <p class="anotherCityCity"><%= tokyo.location.name %></p>
+              <p class="anotherCityWeatherCase">
+                <%= tokyo.current.condition.text %>
+              </p>
+            </div>
+            <div class="anotherCityWeather">
+              <img src="<%= tokyo.current.condition.icon %>" alt="" />
+            </div>
+          </div>
+          <div class="anotherCity anotherCity5">
+            <div class="anotherCityProperties">
+              <p class="anotherCityCountry"><%= berlin.location.country %></p>
+              <p class="anotherCityCity"><%= berlin.location.name %></p>
+              <p class="anotherCityWeatherCase">
+                <%= berlin.current.condition.text %>
+              </p>
+            </div>
+            <div class="anotherCityWeather">
+              <img src="<%= berlin.current.condition.icon %>" alt="" />
+            </div>
+          </div>
+          <div class="anotherCity anotherCity6">
+            <div class="anotherCityProperties">
+              <p class="anotherCityCountry"><%= paris.location.country %></p>
+              <p class="anotherCityCity"><%= paris.location.name %></p>
+              <p class="anotherCityWeatherCase">
+                <%= paris.current.condition.text %>
+              </p>
+            </div>
+            <div class="anotherCityWeather">
+              <img src="<%= paris.current.condition.icon %>" alt="" />
+            </div>
+          </div>
+          <div class="anotherCity anotherCity7">
+            <div class="anotherCityProperties">
+              <p class="anotherCityCountry"><%= rome.location.country %></p>
+              <p class="anotherCityCity"><%= rome.location.name %></p>
+              <p class="anotherCityWeatherCase">
+                <%= rome.current.condition.text %>
+              </p>
+            </div>
+            <div class="anotherCityWeather">
+              <img src="<%= rome.current.condition.icon %>" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const slider = document.querySelector(".slider");
+      const leftBtn = document.querySelector(".sliderBtnLeft");
+      const rightBtn = document.querySelector(".sliderBtnRight");
+
+      const images = [
+        "<%= photos[1] %>",
+        "<%= photos[2] %>",
+        "<%= photos[3] %>",
+        "<%= photos[4] %>",
+        "<%= photos[0] %>",
+      ];
+
+      let id = 0;
+
+      function slide(id) {
+        document.querySelector(".fener").src = images[id];
+        slider.classList.add("image-fade");
+        setTimeout(() => {
+          slider.classList.remove("image-fade");
+        }, 400);
+      }
+
+      leftBtn.addEventListener("click", () => {
+        id--;
+        if (id < 0) {
+          id = images.length - 1;
+        }
+        slide(id);
+      });
+      rightBtn.addEventListener("click", () => {
+        id++;
+        if (id > images.length - 1) {
+          id = 0;
+        }
+        slide(id);
+      });
+    </script>
+    <script src="/index.js"></script>
+  </body>
+</html>
